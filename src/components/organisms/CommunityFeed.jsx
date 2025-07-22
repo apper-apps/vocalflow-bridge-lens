@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
-import Badge from "@/components/atoms/Badge";
-import ApperIcon from "@/components/ApperIcon";
-import AudioPlayer from "@/components/molecules/AudioPlayer";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import submissionService from "@/services/api/submissionService";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
+import ApperIcon from "@/components/ApperIcon";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import Community from "@/components/pages/Community";
+import AudioPlayer from "@/components/molecules/AudioPlayer";
+import Card from "@/components/atoms/Card";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import submissionService from "@/services/api/submissionService";
 
 const CommunityFeed = () => {
   const [submissions, setSubmissions] = useState([]);
@@ -138,18 +139,38 @@ const SubmissionCard = ({ submission, onLike, onComment }) => {
             </span>
           </div>
 
-          {/* Exercise Info */}
+{/* Exercise Info */}
           <div className="flex items-center space-x-2 mb-3">
             <Badge variant="primary">{submission.exerciseType}</Badge>
             <Badge variant="secondary">{submission.goal}</Badge>
           </div>
-
-          {/* Audio Player */}
-          <div className="mb-4">
-            <AudioPlayer src={submission.audioUrl} />
-          </div>
-
-          {/* Analysis Data */}
+        
+          {submission.audioUrl && typeof submission.audioUrl === 'string' && submission.audioUrl.trim() && (
+            <div className="mb-4">
+              <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
+                <div className="flex items-center gap-2 mb-2">
+                  <ApperIcon name="Music" size={16} className="text-primary" />
+                  <span className="text-sm text-gray-300">Audio Recording</span>
+                </div>
+                <AudioPlayer 
+                  src={submission.audioUrl} 
+                  onError={(e) => {
+                    console.warn('Audio playback error for submission:', submission.id, e);
+                  }}
+                />
+              </div>
+            </div>
+          )}
+          
+          {submission.audioUrl && (!submission.audioUrl.trim() || typeof submission.audioUrl !== 'string') && (
+            <div className="mb-4">
+              <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50 text-center">
+                <ApperIcon name="AlertCircle" size={24} className="text-gray-500 mx-auto mb-2" />
+                <p className="text-sm text-gray-500">Audio unavailable</p>
+              </div>
+            </div>
+          )}
+          
           {submission.analysisData && (
             <div className="mb-4 p-3 bg-surface/50 rounded-lg">
               <div className="flex items-center space-x-4 text-sm">
@@ -172,7 +193,6 @@ const SubmissionCard = ({ submission, onLike, onComment }) => {
               </div>
             </div>
           )}
-
           {/* Actions */}
           <div className="flex items-center space-x-4 py-2 border-t border-gray-700">
             <Button
