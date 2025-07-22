@@ -4,7 +4,7 @@ import Loading from "@/components/ui/Loading";
 import Button from "@/components/atoms/Button";
 import { cn } from "@/utils/cn";
 
-const AudioPlayer = ({ src, className, onPlay, onPause, enableRecording = false }) => {
+const AudioPlayer = ({ src, className, onPlay, onPause, onError, enableRecording = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -27,6 +27,7 @@ const togglePlayPause = () => {
           console.error('Audio play failed:', error);
           setHasError(true);
           setIsPlaying(false);
+          onError?.(error);
         });
         setIsPlaying(true);
         onPlay?.();
@@ -48,11 +49,13 @@ const handleLoadedMetadata = () => {
     }
   };
 
-  const handleError = () => {
+const handleError = (error) => {
     setHasError(true);
     setIsLoading(false);
     setIsPlaying(false);
-    console.error('Audio failed to load:', src);
+    const errorMessage = `Audio failed to load: ${src}`;
+    console.error(errorMessage, error);
+    onError?.(errorMessage);
   };
 
   const handleLoadStart = () => {

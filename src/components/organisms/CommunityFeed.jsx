@@ -144,8 +144,7 @@ const SubmissionCard = ({ submission, onLike, onComment }) => {
             <Badge variant="primary">{submission.exerciseType}</Badge>
             <Badge variant="secondary">{submission.goal}</Badge>
           </div>
-        
-          {submission.audioUrl && typeof submission.audioUrl === 'string' && submission.audioUrl.trim() && (
+{submission.audioUrl && typeof submission.audioUrl === 'string' && submission.audioUrl.trim() && !submission.audioUrl.startsWith('/api/') ? (
             <div className="mb-4">
               <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-700">
                 <div className="flex items-center gap-2 mb-2">
@@ -154,23 +153,21 @@ const SubmissionCard = ({ submission, onLike, onComment }) => {
                 </div>
                 <AudioPlayer 
                   src={submission.audioUrl} 
-                  onError={(e) => {
-                    console.warn('Audio playback error for submission:', submission.id, e);
+                  onError={(error) => {
+                    console.warn('Audio playback error for submission:', submission.Id, error);
                   }}
                 />
               </div>
             </div>
-          )}
-          
-          {submission.audioUrl && (!submission.audioUrl.trim() || typeof submission.audioUrl !== 'string') && (
+          ) : (
             <div className="mb-4">
               <div className="bg-gray-800/30 rounded-lg p-4 border border-gray-700/50 text-center">
                 <ApperIcon name="AlertCircle" size={24} className="text-gray-500 mx-auto mb-2" />
-                <p className="text-sm text-gray-500">Audio unavailable</p>
+                <p className="text-sm text-gray-500">Audio recording not available</p>
+                <p className="text-xs text-gray-600 mt-1">Upload a recording to share with the community</p>
               </div>
             </div>
           )}
-          
           {submission.analysisData && (
             <div className="mb-4 p-3 bg-surface/50 rounded-lg">
               <div className="flex items-center space-x-4 text-sm">

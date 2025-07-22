@@ -2,7 +2,7 @@
   {
     "Id": 1,
     "userId": 1,
-    "audioUrl": "/api/audio/submission-1.mp3",
+    "audioUrl": null,
     "date": "2024-03-15T10:30:00.000Z",
     "goal": "Pitch Accuracy",
     "exerciseType": "Scales",
@@ -33,7 +33,7 @@
   {
     "Id": 2,
     "userId": 3,
-    "audioUrl": "/api/audio/submission-2.mp3",
+    "audioUrl": null,
     "date": "2024-03-15T14:20:00.000Z",
     "goal": "Jazz Improvisation",
     "exerciseType": "Improvisation",
@@ -57,7 +57,7 @@
   {
     "Id": 3,
     "userId": 2,
-    "audioUrl": "/api/audio/submission-3.mp3",
+    "audioUrl": null,
     "date": "2024-03-15T16:45:00.000Z",
     "goal": "High Notes",
     "exerciseType": "Range Extension",
@@ -81,7 +81,7 @@
   {
     "Id": 4,
     "userId": 4,
-    "audioUrl": "/api/audio/submission-4.mp3",
+    "audioUrl": null,
     "date": "2024-03-15T19:15:00.000Z",
     "goal": "Resonance",
     "exerciseType": "Warm-ups",
@@ -92,7 +92,7 @@
         "userId": 1,
         "userName": "Sarah Chen",
         "text": "Your resonance is incredible! Really rich and full sound.",
-        "date": "2024-03-15T20:00:00.000Z"
+        "date": "2024-03-15T20:30:00.000Z"
       },
       {
         "id": 6,
