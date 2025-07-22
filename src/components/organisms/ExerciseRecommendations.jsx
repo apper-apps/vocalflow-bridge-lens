@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
-import Badge from "@/components/atoms/Badge";
-import Progress from "@/components/atoms/Progress";
-import ApperIcon from "@/components/ApperIcon";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import exerciseService from "@/services/api/exerciseService";
 import { toast } from "react-toastify";
-import { cn } from "@/lib/utils";
+import ApperIcon from "@/components/ApperIcon";
+import Empty from "@/components/ui/Empty";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import Card from "@/components/atoms/Card";
+import Progress from "@/components/atoms/Progress";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import exerciseService from "@/services/api/exerciseService";
+import { cn } from "@/utils/cn";
 
-const ExerciseRecommendations = ({ userLevel = "Intermediate", userGoals = ["Pitch Accuracy", "Breath Control"] }) => {
-  const [recommendations, setRecommendations] = useState([]);
+function ExerciseRecommendations({ userLevel, userGoals }) {
+  const [exercises, setExercises] = useState([])
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [completedExercises, setCompletedExercises] = useState(new Set());
 
-  const loadRecommendations = async () => {
+const loadRecommendations = async () => {
     try {
       setError("");
       setLoading(true);
       const data = await exerciseService.getRecommendations(userLevel, userGoals);
-      setRecommendations(data);
+      setExercises(data);
     } catch (err) {
       console.error("Error loading recommendations:", err);
       setError("Failed to load exercise recommendations");
@@ -52,7 +52,7 @@ const ExerciseRecommendations = ({ userLevel = "Intermediate", userGoals = ["Pit
     return <Error message={error} onRetry={loadRecommendations} />;
   }
 
-  if (recommendations.length === 0) {
+if (exercises.length === 0) {
     return (
       <Empty
         title="No recommendations available"
@@ -65,9 +65,8 @@ const ExerciseRecommendations = ({ userLevel = "Intermediate", userGoals = ["Pit
   }
 
   const completedCount = completedExercises.size;
-  const totalCount = recommendations.length;
+  const totalCount = exercises.length;
   const progressPercentage = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
-
   return (
     <div className="space-y-6">
       {/* Header with Progress */}
@@ -87,9 +86,9 @@ const ExerciseRecommendations = ({ userLevel = "Intermediate", userGoals = ["Pit
         </div>
       </Card>
 
-      {/* Exercise Grid */}
+{/* Exercise Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {recommendations.map((exercise) => (
+        {exercises.map((exercise) => (
           <ExerciseCard
             key={exercise.Id}
             exercise={exercise}
