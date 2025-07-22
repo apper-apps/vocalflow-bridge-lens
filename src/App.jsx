@@ -8,6 +8,7 @@ import Exercises from "@/components/pages/Exercises";
 import Community from "@/components/pages/Community";
 import Messages from "@/components/pages/Messages";
 import Events from "@/components/pages/Events";
+
 function App() {
   return (
     <div className="min-h-screen bg-background">
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/practice" element={<Practice />} />
-<Route path="/exercises" element={<Exercises />} />
+          <Route path="/exercises" element={<Exercises />} />
           <Route path="/community" element={<Community />} />
           <Route path="/messages/*" element={<Messages />} />
           <Route path="/events" element={<Events />} />
