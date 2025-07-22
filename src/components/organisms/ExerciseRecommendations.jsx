@@ -478,9 +478,8 @@ const ExercisePlayer = ({ exercise, onClose, onComplete }) => {
             </div>
           </div>
         </div>
-      </Card>
-    </div>
-  );
+</Card>
+  </div>
 );
 };
 
