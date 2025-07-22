@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 1,
+    "title": "Breath Support Masterclass",
+    "instructorId": 1,
+    "instructorName": "Dr. Maria Gonzalez",
+    "datetime": "2024-03-20T18:00:00.000Z",
+    "duration": 90,
+    "description": "Learn advanced breath support techniques for powerful and sustainable singing. Perfect for intermediate to advanced singers looking to improve their foundation.",
+    "rsvpList": [1, 2, 3, 4],
+    "maxParticipants": 20,
+    "streamUrl": "https://zoom.us/j/1234567890",
+    "category": "Technique",
+    "level": "Intermediate"
+  },
+  {
+    "Id": 2,
+    "title": "Jazz Vocal Improvisation Workshop",
+    "instructorId": 2,
+    "instructorName": "Marcus Johnson",
+    "datetime": "2024-03-22T19:30:00.000Z",
+    "duration": 120,
+    "description": "Explore the art of jazz scatting and vocal improvisation. We'll cover basic patterns, chord progressions, and develop your unique improvisational voice.",
+    "rsvpList": [3, 4],
+    "maxParticipants": 15,
+    "streamUrl": "https://zoom.us/j/0987654321",
+    "category": "Style",
+    "level": "Intermediate"
+  },
+  {
+    "Id": 3,
+    "title": "Classical Vocal Technique Fundamentals",
+    "instructorId": 3,
+    "instructorName": "Prof. Catherine Williams",
+    "datetime": "2024-03-25T17:00:00.000Z",
+    "duration": 75,
+    "description": "Master the fundamentals of classical vocal technique including posture, breathing, resonance, and vowel formation.",
+    "rsvpList": [1, 4],
+    "maxParticipants": 25,
+    "streamUrl": "https://zoom.us/j/1122334455",
+    "category": "Classical",
+    "level": "Beginner"
+  },
+  {
+    "Id": 4,
+    "title": "Pop Vocal Styling and Performance",
+    "instructorId": 4,
+    "instructorName": "Alex Rivera",
+    "datetime": "2024-03-27T20:00:00.000Z",
+    "duration": 90,
+    "description": "Learn contemporary pop vocal techniques including belt voice, mixed voice, and modern styling approaches for popular music.",
+    "rsvpList": [2],
+    "maxParticipants": 18,
+    "streamUrl": "https://zoom.us/j/5566778899",
+    "category": "Contemporary",
+    "level": "Intermediate"
+  },
+  {
+    "Id": 5,
+    "title": "Vocal Health and Maintenance",
+    "instructorId": 5,
+    "instructorName": "Dr. Jennifer Park",
+    "datetime": "2024-03-30T16:00:00.000Z",
+    "duration": 60,
+    "description": "Essential information about maintaining vocal health, preventing injury, and recovery techniques for singers of all levels.",
+    "rsvpList": [1, 2, 3],
+    "maxParticipants": 30,
+    "streamUrl": "https://zoom.us/j/2233445566",
+    "category": "Health",
+    "level": "All Levels"
+  }
+]

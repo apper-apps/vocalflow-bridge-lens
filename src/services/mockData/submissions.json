@@ -1,0 +1,112 @@
+[
+  {
+    "Id": 1,
+    "userId": 1,
+    "audioUrl": "/api/audio/submission-1.mp3",
+    "date": "2024-03-15T10:30:00.000Z",
+    "goal": "Pitch Accuracy",
+    "exerciseType": "Scales",
+    "likes": 12,
+    "comments": [
+      {
+        "id": 1,
+        "userId": 2,
+        "userName": "Mike Rodriguez",
+        "text": "Beautiful tone! Your pitch accuracy has really improved.",
+        "date": "2024-03-15T11:45:00.000Z"
+      },
+      {
+        "id": 2,
+        "userId": 3,
+        "userName": "Emma Taylor",
+        "text": "Love the smooth transitions between notes. Keep it up!",
+        "date": "2024-03-15T12:15:00.000Z"
+      }
+    ],
+    "analysisData": {
+      "pitchAccuracy": 88,
+      "breathControl": 92,
+      "timing": 85,
+      "overallScore": 88
+    }
+  },
+  {
+    "Id": 2,
+    "userId": 3,
+    "audioUrl": "/api/audio/submission-2.mp3",
+    "date": "2024-03-15T14:20:00.000Z",
+    "goal": "Jazz Improvisation",
+    "exerciseType": "Improvisation",
+    "likes": 18,
+    "comments": [
+      {
+        "id": 3,
+        "userId": 1,
+        "userName": "Sarah Chen",
+        "text": "Fantastic jazz phrasing! Your scatting is getting so much better.",
+        "date": "2024-03-15T15:00:00.000Z"
+      }
+    ],
+    "analysisData": {
+      "creativity": 95,
+      "rhythmAccuracy": 90,
+      "phrasing": 93,
+      "overallScore": 92
+    }
+  },
+  {
+    "Id": 3,
+    "userId": 2,
+    "audioUrl": "/api/audio/submission-3.mp3",
+    "date": "2024-03-15T16:45:00.000Z",
+    "goal": "High Notes",
+    "exerciseType": "Range Extension",
+    "likes": 7,
+    "comments": [
+      {
+        "id": 4,
+        "userId": 4,
+        "userName": "Alex Kim",
+        "text": "Great work on those high C's! Your support is solid.",
+        "date": "2024-03-15T17:30:00.000Z"
+      }
+    ],
+    "analysisData": {
+      "rangeExtension": 82,
+      "support": 88,
+      "clarity": 85,
+      "overallScore": 85
+    }
+  },
+  {
+    "Id": 4,
+    "userId": 4,
+    "audioUrl": "/api/audio/submission-4.mp3",
+    "date": "2024-03-15T19:15:00.000Z",
+    "goal": "Resonance",
+    "exerciseType": "Warm-ups",
+    "likes": 15,
+    "comments": [
+      {
+        "id": 5,
+        "userId": 1,
+        "userName": "Sarah Chen",
+        "text": "Your resonance is incredible! Really rich and full sound.",
+        "date": "2024-03-15T20:00:00.000Z"
+      },
+      {
+        "id": 6,
+        "userId": 3,
+        "userName": "Emma Taylor",
+        "text": "Those low notes are absolutely gorgeous. Inspiring!",
+        "date": "2024-03-15T20:30:00.000Z"
+      }
+    ],
+    "analysisData": {
+      "resonance": 94,
+      "toneQuality": 96,
+      "consistency": 91,
+      "overallScore": 94
+    }
+  }
+]

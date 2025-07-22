@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "email": "sarah.chen@email.com",
+    "name": "Sarah Chen",
+    "bio": "Professional soprano with 8 years of classical training. Currently exploring contemporary styles and Broadway techniques.",
+    "voiceType": "Soprano",
+    "level": "Advanced",
+    "goals": ["Pitch Accuracy", "Breath Control", "Range Extension"],
+    "streak": 23,
+    "joinedDate": "2024-01-15T00:00:00.000Z",
+    "avatar": "https://images.unsplash.com/photo-1494790108755-2616b6d6cd5f?w=150&h=150&fit=crop&crop=face"
+  },
+  {
+    "Id": 2,
+    "email": "mike.rodriguez@email.com",
+    "name": "Mike Rodriguez",
+    "bio": "Tenor focusing on musical theater and pop vocals. Love collaborating with other singers and sharing vocal techniques.",
+    "voiceType": "Tenor",
+    "level": "Intermediate",
+    "goals": ["Agility", "Performance Confidence", "High Notes"],
+    "streak": 12,
+    "joinedDate": "2024-02-03T00:00:00.000Z",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+  },
+  {
+    "Id": 3,
+    "email": "emma.taylor@email.com",
+    "name": "Emma Taylor",
+    "bio": "Mezzo-soprano with a passion for jazz and soul music. Currently working on improving my improvisation skills.",
+    "voiceType": "Mezzo-Soprano",
+    "level": "Intermediate",
+    "goals": ["Jazz Improvisation", "Vibrato Control", "Stage Presence"],
+    "streak": 45,
+    "joinedDate": "2023-11-20T00:00:00.000Z",
+    "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+  },
+  {
+    "Id": 4,
+    "email": "alex.kim@email.com",
+    "name": "Alex Kim",
+    "bio": "Bass-baritone exploring opera and choral music. Dedicated to daily vocal exercises and technique refinement.",
+    "voiceType": "Bass-Baritone",
+    "level": "Advanced",
+    "goals": ["Low Range Development", "Resonance", "Classical Technique"],
+    "streak": 8,
+    "joinedDate": "2024-03-10T00:00:00.000Z",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+  }
+]

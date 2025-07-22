@@ -1,0 +1,47 @@
+[
+  {
+    "Id": 1,
+    "userId": 1,
+    "date": "2024-03-15T00:00:00.000Z",
+    "duration": 45,
+    "voiceHealth": 4,
+    "exercises": ["Major Scale Warm-up", "Vocal Agility Patterns", "Sustained Tone Exercise"],
+    "notes": "Felt great today! High notes were particularly clear and supported."
+  },
+  {
+    "Id": 2,
+    "userId": 1,
+    "date": "2024-03-14T00:00:00.000Z",
+    "duration": 30,
+    "voiceHealth": 3,
+    "exercises": ["Lip Trills with Scales", "Staccato Scales"],
+    "notes": "Shorter session due to slight throat irritation. Focused on gentle warm-ups."
+  },
+  {
+    "Id": 3,
+    "userId": 2,
+    "date": "2024-03-15T00:00:00.000Z",
+    "duration": 60,
+    "voiceHealth": 5,
+    "exercises": ["Major Scale Warm-up", "Octave Jumps", "Messa di Voce"],
+    "notes": "Amazing practice session! Nailed those high C's and felt very controlled."
+  },
+  {
+    "Id": 4,
+    "userId": 3,
+    "date": "2024-03-15T00:00:00.000Z",
+    "duration": 40,
+    "voiceHealth": 4,
+    "exercises": ["Vocal Agility Patterns", "Vowel Modification Drill"],
+    "notes": "Working on jazz improvisation techniques. Good progress on flexibility."
+  },
+  {
+    "Id": 5,
+    "userId": 4,
+    "date": "2024-03-15T00:00:00.000Z",
+    "duration": 35,
+    "voiceHealth": 5,
+    "exercises": ["Sustained Tone Exercise", "Vowel Modification Drill"],
+    "notes": "Resonance work going well. Low notes feel very stable and rich."
+  }
+]

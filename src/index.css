@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-background text-white font-body antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10;
+  }
+  
+  .glass-card {
+    @apply glass rounded-xl shadow-2xl;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  }
+  
+  .waveform-bar {
+    @apply bg-gradient-to-t from-primary to-secondary;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  .practice-flame {
+    @apply text-accent;
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+  }
+}
+
+/* Toast Customization */
+.Toastify__toast-container {
+  @apply text-sm;
+  width: 320px;
+}
+
+.Toastify__toast {
+  @apply glass-card text-white border-none;
+  min-height: 50px;
+  padding: 12px 16px;
+}
+
+.Toastify__toast--success {
+  @apply border-green-500/30;
+}
+
+.Toastify__toast--error {
+  @apply border-red-500/30;
+}
+
+.Toastify__toast--info {
+  @apply border-blue-500/30;
+}
+
+.Toastify__progress-bar {
+  @apply bg-gradient-to-r from-primary to-secondary;
+}
+
+/* Audio Player Customization */
+audio {
+  @apply w-full h-8 rounded-lg;
+  background: linear-gradient(90deg, #1F2937 0%, #374151 100%);
+}
+
+audio::-webkit-media-controls-panel {
+  background: linear-gradient(90deg, #1F2937 0%, #374151 100%);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Form Input Glow Effect */
+.input-glow:focus {
+  @apply ring-2 ring-primary/50 shadow-glow;
+}
+
+/* Loading Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #374151 0px, #4B5563 40px, #374151 80px);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
