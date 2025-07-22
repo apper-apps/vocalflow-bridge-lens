@@ -7,16 +7,21 @@ const AudioPlayer = ({ src, className, onPlay, onPause }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const audioRef = useRef(null);
-
-  const togglePlayPause = () => {
-    if (audioRef.current) {
+const togglePlayPause = () => {
+    if (audioRef.current && !hasError && !isLoading) {
       if (isPlaying) {
         audioRef.current.pause();
         setIsPlaying(false);
         onPause?.();
       } else {
-        audioRef.current.play();
+        audioRef.current.play().catch((error) => {
+          console.error('Audio play failed:', error);
+          setHasError(true);
+          setIsPlaying(false);
+        });
         setIsPlaying(true);
         onPlay?.();
       }
@@ -29,10 +34,24 @@ const AudioPlayer = ({ src, className, onPlay, onPause }) => {
     }
   };
 
-  const handleLoadedMetadata = () => {
+const handleLoadedMetadata = () => {
     if (audioRef.current) {
       setDuration(audioRef.current.duration);
+      setIsLoading(false);
+      setHasError(false);
     }
+  };
+
+  const handleError = () => {
+    setHasError(true);
+    setIsLoading(false);
+    setIsPlaying(false);
+    console.error('Audio failed to load:', src);
+  };
+
+  const handleLoadStart = () => {
+    setIsLoading(true);
+    setHasError(false);
   };
 
   const handleSeek = (e) => {
@@ -55,12 +74,15 @@ const AudioPlayer = ({ src, className, onPlay, onPause }) => {
 
   return (
     <div className={cn("bg-surface rounded-lg p-4 border border-gray-700", className)}>
-      <audio
+<audio
         ref={audioRef}
         src={src}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={() => setIsPlaying(false)}
+        onError={handleError}
+        onLoadStart={handleLoadStart}
+        preload="metadata"
         className="hidden"
       />
       
@@ -71,11 +93,25 @@ const AudioPlayer = ({ src, className, onPlay, onPause }) => {
           onClick={togglePlayPause}
           className="flex-shrink-0"
         >
-          <ApperIcon
-            name={isPlaying ? "Pause" : "Play"}
-            size={18}
-            className="text-primary"
-          />
+{isLoading ? (
+            <ApperIcon
+              name="Loader2"
+              size={18}
+              className="text-primary animate-spin"
+            />
+          ) : hasError ? (
+            <ApperIcon
+              name="AlertCircle"
+              size={18}
+              className="text-red-400"
+            />
+          ) : (
+            <ApperIcon
+              name={isPlaying ? "Pause" : "Play"}
+              size={18}
+              className="text-primary"
+            />
+          )}
         </Button>
 
         <div className="flex-1 flex items-center space-x-3">
@@ -83,9 +119,12 @@ const AudioPlayer = ({ src, className, onPlay, onPause }) => {
             {formatTime(currentTime)}
           </span>
           
-          <div
-            className="flex-1 h-2 bg-gray-700 rounded-full cursor-pointer overflow-hidden"
-            onClick={handleSeek}
+<div
+            className={cn(
+              "flex-1 h-2 bg-gray-700 rounded-full overflow-hidden transition-opacity",
+              hasError || isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+            )}
+            onClick={!hasError && !isLoading ? handleSeek : undefined}
           >
             <div
               className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-100"
@@ -93,27 +132,33 @@ const AudioPlayer = ({ src, className, onPlay, onPause }) => {
             />
           </div>
           
-          <span className="text-xs text-gray-400 min-w-[35px]">
-            {formatTime(duration)}
+<span className="text-xs text-gray-400 min-w-[35px]">
+            {hasError ? "--:--" : formatTime(duration)}
           </span>
         </div>
 
-        {/* Waveform visualization */}
+{/* Waveform visualization */}
         <div className="flex items-center space-x-1 ml-4">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                "w-1 rounded-full transition-all duration-300",
-                isPlaying ? "waveform-bar" : "bg-gray-600",
-                isPlaying && `h-${Math.floor(Math.random() * 4) + 2}`
-              )}
-              style={{
-                height: isPlaying ? `${Math.random() * 16 + 8}px` : "8px",
-                animationDelay: `${i * 0.1}s`
-              }}
-            />
-          ))}
+          {hasError ? (
+            <span className="text-xs text-red-400">Audio unavailable</span>
+          ) : isLoading ? (
+            <span className="text-xs text-gray-400">Loading...</span>
+          ) : (
+            [...Array(8)].map((_, i) => (
+              <div
+                key={i}
+                className={cn(
+                  "w-1 rounded-full transition-all duration-300",
+                  isPlaying ? "waveform-bar" : "bg-gray-600",
+                  isPlaying && `h-${Math.floor(Math.random() * 4) + 2}`
+                )}
+                style={{
+                  height: isPlaying ? `${Math.random() * 16 + 8}px` : "8px",
+                  animationDelay: `${i * 0.1}s`
+                }}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>
