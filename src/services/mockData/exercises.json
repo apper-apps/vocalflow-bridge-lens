@@ -7,9 +7,11 @@
     "duration": 5,
     "instructions": "Sing ascending and descending major scales on 'Ma' syllable. Focus on smooth voice connection and consistent tone throughout your range.",
     "targetAreas": ["Pitch Accuracy", "Voice Connection", "Breath Support"],
-    "audioExample": "/api/audio/exercise-1.mp3"
+    "audioExample": "/api/audio/exercise-1.mp3",
+    "syllables": ["Ma", "May", "Mi", "Mo", "Mu", "Ma", "May", "Mi"],
+    "visualPattern": [30, 35, 40, 45, 50, 55, 60, 65, 60, 55, 50, 45, 40, 35, 30, 35, 40, 45, 50, 45]
   },
-  {
+{
     "Id": 2,
     "name": "Lip Trills with Scales",
     "category": "Warm-ups",
@@ -17,9 +19,11 @@
     "duration": 3,
     "instructions": "Perform lip trills (lip bubbles) while singing major scales. This exercise releases tension and promotes breath flow.",
     "targetAreas": ["Breath Control", "Relaxation", "Range Development"],
-    "audioExample": "/api/audio/exercise-2.mp3"
+    "audioExample": "/api/audio/exercise-2.mp3",
+    "syllables": ["Brr", "Brr", "Brr", "Brr", "Brr", "Brr"],
+    "visualPattern": [25, 30, 40, 50, 60, 70, 65, 55, 45, 35, 25, 30]
   },
-  {
+{
     "Id": 3,
     "name": "Vocal Agility Patterns",
     "category": "Agility",
@@ -27,9 +31,11 @@
     "duration": 8,
     "instructions": "Practice rapid scale passages and arpeggios on various vowels. Start slowly and gradually increase tempo while maintaining clarity.",
     "targetAreas": ["Agility", "Coordination", "Articulation"],
-    "audioExample": "/api/audio/exercise-3.mp3"
+    "audioExample": "/api/audio/exercise-3.mp3",
+    "syllables": ["Na", "Ne", "Ni", "No", "Nu", "Na", "Ne", "Ni", "No", "Nu", "Na", "Ne"],
+    "visualPattern": [40, 50, 45, 55, 50, 60, 55, 65, 60, 70, 65, 75, 70, 65, 60, 55, 50, 45, 40, 45]
   },
-  {
+{
     "Id": 4,
     "name": "Sustained Tone Exercise",
     "category": "Breath Control",
@@ -37,9 +43,11 @@
     "duration": 6,
     "instructions": "Hold comfortable pitches for extended periods (10-20 seconds). Focus on steady airflow and consistent volume.",
     "targetAreas": ["Breath Control", "Endurance", "Tone Stability"],
-    "audioExample": "/api/audio/exercise-4.mp3"
+    "audioExample": "/api/audio/exercise-4.mp3",
+    "syllables": ["Ah", "Ah", "Ah", "Oh", "Oh", "Oh"],
+    "visualPattern": [50, 50, 50, 50, 50, 50, 55, 55, 55, 55, 55, 55, 50, 50, 50, 50]
   },
-  {
+{
     "Id": 5,
     "name": "Octave Jumps",
     "category": "Range Extension",
@@ -47,9 +55,11 @@
     "duration": 10,
     "instructions": "Practice jumping between octaves smoothly. Use proper breath support and avoid vocal strain on high notes.",
     "targetAreas": ["Range Extension", "Vocal Flexibility", "Register Blending"],
-    "audioExample": "/api/audio/exercise-5.mp3"
+    "audioExample": "/api/audio/exercise-5.mp3",
+    "syllables": ["Ya", "Ya", "Ya", "Ya", "Yo", "Yo", "Yo", "Yo"],
+    "visualPattern": [30, 80, 30, 80, 30, 80, 35, 75, 35, 75, 35, 75, 30, 80, 30, 80]
   },
-  {
+{
     "Id": 6,
     "name": "Staccato Scales",
     "category": "Agility",
@@ -57,9 +67,11 @@
     "duration": 7,
     "instructions": "Sing scales with short, detached notes. Focus on clean attacks and releases while maintaining good breath support.",
     "targetAreas": ["Articulation", "Breath Management", "Precision"],
-    "audioExample": "/api/audio/exercise-6.mp3"
+    "audioExample": "/api/audio/exercise-6.mp3",
+    "syllables": ["Ta", "Ta", "Ta", "Ta", "Te", "Te", "Te", "Te", "Ti", "Ti", "Ti", "Ti"],
+    "visualPattern": [40, 35, 45, 40, 50, 45, 55, 50, 60, 55, 65, 60, 70, 65, 60, 55, 50, 45, 40, 35]
   },
-  {
+{
     "Id": 7,
     "name": "Vowel Modification Drill",
     "category": "Technique",
@@ -67,9 +79,11 @@
     "duration": 9,
     "instructions": "Practice modifying vowels as you ascend in pitch. Learn to adjust vowel shapes for optimal resonance in different registers.",
     "targetAreas": ["Resonance", "Register Management", "Vowel Clarity"],
-    "audioExample": "/api/audio/exercise-7.mp3"
+    "audioExample": "/api/audio/exercise-7.mp3",
+    "syllables": ["Ah", "Eh", "Ee", "Oh", "Oo", "Ah", "Eh", "Ee", "Oh", "Oo"],
+    "visualPattern": [35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 40]
   },
-  {
+{
     "Id": 8,
     "name": "Messa di Voce",
     "category": "Breath Control",
@@ -77,6 +91,8 @@
     "duration": 8,
     "instructions": "Start soft, gradually crescendo to forte, then diminuendo back to pianissimo on sustained notes. Develops dynamic control.",
     "targetAreas": ["Dynamic Control", "Breath Management", "Tone Quality"],
-    "audioExample": "/api/audio/exercise-8.mp3"
+    "audioExample": "/api/audio/exercise-8.mp3",
+    "syllables": ["Ah", "Ah", "Ah", "Ah", "Oh", "Oh", "Oh", "Oh"],
+    "visualPattern": [20, 25, 35, 50, 70, 85, 70, 50, 35, 25, 20, 25, 35, 50, 70, 85, 70, 50, 35, 20]
   }
 ]

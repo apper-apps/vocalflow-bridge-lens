@@ -4,8 +4,11 @@ import ApperIcon from "@/components/ApperIcon";
 import Empty from "@/components/ui/Empty";
 import Error from "@/components/ui/Error";
 import Loading from "@/components/ui/Loading";
+import Exercises from "@/components/pages/Exercises";
+import AudioPlayer from "@/components/molecules/AudioPlayer";
 import Card from "@/components/atoms/Card";
 import Progress from "@/components/atoms/Progress";
+import Input from "@/components/atoms/Input";
 import Badge from "@/components/atoms/Badge";
 import Button from "@/components/atoms/Button";
 import exerciseService from "@/services/api/exerciseService";
@@ -16,32 +19,54 @@ function ExerciseRecommendations({ userLevel, userGoals }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [completedExercises, setCompletedExercises] = useState(new Set());
-
-const loadRecommendations = async () => {
+  const [selectedExercise, setSelectedExercise] = useState(null);
+  const [dailyNeeds, setDailyNeeds] = useState("");
+  const [isAiLoading, setIsAiLoading] = useState(false);
+const loadRecommendations = async (needsInput = "") => {
     try {
       setError("");
       setLoading(true);
-      const data = await exerciseService.getRecommendations(userLevel, userGoals);
+      const data = await exerciseService.getAiRecommendations(userLevel, userGoals, needsInput);
       setExercises(data);
+      if (needsInput) {
+        toast.success("AI curated exercises for your needs!");
+      }
     } catch (err) {
       console.error("Error loading recommendations:", err);
       setError("Failed to load exercise recommendations");
     } finally {
       setLoading(false);
+      setIsAiLoading(false);
     }
+  };
+
+  const handleAiRecommendations = async () => {
+    if (!dailyNeeds.trim()) {
+      toast.warning("Please describe what you need to work on today");
+      return;
+    }
+    
+    setIsAiLoading(true);
+    await loadRecommendations(dailyNeeds.trim());
   };
 
   useEffect(() => {
     loadRecommendations();
   }, [userLevel, userGoals]);
-
-  const handleStartExercise = (exerciseId) => {
-    toast.info("Exercise player opening soon!");
+const handleStartExercise = (exerciseId) => {
+    const exercise = exercises.find(ex => ex.Id === exerciseId);
+    if (exercise) {
+      setSelectedExercise(exercise);
+    }
   };
 
   const handleCompleteExercise = (exerciseId) => {
     setCompletedExercises(prev => new Set([...prev, exerciseId]));
     toast.success("Exercise completed! Great work! 🎵");
+  };
+
+  const handleCloseExercise = () => {
+    setSelectedExercise(null);
   };
 
   if (loading) {
@@ -67,8 +92,45 @@ if (exercises.length === 0) {
   const completedCount = completedExercises.size;
   const totalCount = exercises.length;
   const progressPercentage = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
-  return (
+return (
     <div className="space-y-6">
+      {/* AI Input Section */}
+      <Card variant="glow">
+        <div className="space-y-4">
+          <div className="flex items-center space-x-2">
+            <ApperIcon name="Brain" size={20} className="text-primary" />
+            <h2 className="text-xl font-display font-bold gradient-text">AI Exercise Curator</h2>
+          </div>
+          <p className="text-sm text-gray-400">Tell the AI what you need to work on today for personalized recommendations</p>
+          <div className="flex space-x-3">
+            <Input
+              placeholder="e.g., I need to work on breath control and high notes..."
+              value={dailyNeeds}
+              onChange={(e) => setDailyNeeds(e.target.value)}
+              className="flex-1"
+              onKeyPress={(e) => e.key === 'Enter' && handleAiRecommendations()}
+            />
+            <Button 
+              onClick={handleAiRecommendations}
+              disabled={isAiLoading || !dailyNeeds.trim()}
+              variant="primary"
+            >
+              {isAiLoading ? (
+                <>
+                  <ApperIcon name="Loader2" size={16} className="mr-2 animate-spin" />
+                  AI Thinking...
+                </>
+              ) : (
+                <>
+                  <ApperIcon name="Sparkles" size={16} className="mr-2" />
+                  Curate
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      </Card>
+
       {/* Header with Progress */}
       <Card variant="glow">
         <div className="space-y-4">
@@ -97,7 +159,16 @@ if (exercises.length === 0) {
             onComplete={() => handleCompleteExercise(exercise.Id)}
           />
         ))}
-      </div>
+</div>
+
+      {/* Exercise Player Modal */}
+      {selectedExercise && (
+        <ExercisePlayer
+          exercise={selectedExercise}
+          onClose={handleCloseExercise}
+          onComplete={() => handleCompleteExercise(selectedExercise.Id)}
+        />
+      )}
     </div>
   );
 };
@@ -197,8 +268,220 @@ const ExerciseCard = ({ exercise, isCompleted, onStart, onComplete }) => {
           )}
         </div>
       </div>
-    </Card>
+</Card>
   );
+};
+
+const ExercisePlayer = ({ exercise, onClose, onComplete }) => {
+  const [currentSyllable, setCurrentSyllable] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showGraph, setShowGraph] = useState(true);
+  const [hasCompleted, setHasCompleted] = useState(false);
+
+  const handleComplete = () => {
+    setHasCompleted(true);
+    onComplete();
+    toast.success("Exercise completed! Great work! 🎵");
+  };
+
+  const handleNext = () => {
+    if (currentSyllable < exercise.syllables.length - 1) {
+      setCurrentSyllable(prev => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentSyllable > 0) {
+      setCurrentSyllable(prev => prev - 1);
+    }
+  };
+
+  // Generate visual pattern for the graph
+  const generatePattern = () => {
+    const pattern = exercise.visualPattern || [];
+    return pattern.length > 0 ? pattern : Array.from({ length: 20 }, (_, i) => 
+      Math.sin(i * 0.5) * 30 + 50 + Math.random() * 10
+    );
+  };
+
+  const pattern = generatePattern();
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        <div className="space-y-6">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-display font-bold gradient-text">{exercise.name}</h2>
+              <p className="text-sm text-gray-400">{exercise.category} • {exercise.difficulty} • {exercise.duration} min</p>
+            </div>
+            <Button variant="ghost" size="icon" onClick={onClose}>
+              <ApperIcon name="X" size={20} />
+            </Button>
+          </div>
+
+          {/* Instructions */}
+          <Card className="bg-surface/50">
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2">
+                <ApperIcon name="BookOpen" size={18} className="text-accent" />
+                <h3 className="font-semibold">Instructions</h3>
+              </div>
+              <p className="text-gray-300">{exercise.instructions}</p>
+              <div className="flex flex-wrap gap-2">
+                {exercise.targetAreas.map((area) => (
+                  <Badge key={area} variant="accent" className="text-xs">
+                    {area}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </Card>
+
+          {/* Visual Graph and Syllables */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Exercise Graph */}
+            <Card className="bg-surface/50">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold">Exercise Pattern</h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowGraph(!showGraph)}
+                  >
+                    <ApperIcon name={showGraph ? "EyeOff" : "Eye"} size={16} />
+                  </Button>
+                </div>
+                
+                {showGraph && (
+                  <div className="relative h-40 bg-gray-900 rounded-lg overflow-hidden">
+                    <svg width="100%" height="100%" className="absolute inset-0">
+                      <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#6B46C1" />
+                          <stop offset="50%" stopColor="#EC4899" />
+                          <stop offset="100%" stopColor="#F59E0B" />
+                        </linearGradient>
+                      </defs>
+                      <polyline
+                        points={pattern.map((value, index) => 
+                          `${(index / (pattern.length - 1)) * 100}%,${100 - (value / 100) * 100}%`
+                        ).join(' ')}
+                        fill="none"
+                        stroke="url(#gradient)"
+                        strokeWidth="3"
+                        className="animate-pulse"
+                      />
+                    </svg>
+                    
+                    {/* Current position indicator */}
+                    <div 
+                      className="absolute top-0 bottom-0 w-0.5 bg-white/60 transition-all duration-500"
+                      style={{ 
+                        left: `${(currentSyllable / (exercise.syllables.length - 1)) * 100}%` 
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+            </Card>
+
+            {/* Syllables/Vowels */}
+            <Card className="bg-surface/50">
+              <div className="space-y-4">
+                <h3 className="font-semibold">Syllables & Vowels</h3>
+                
+                <div className="text-center space-y-4">
+                  <div className="text-6xl font-display font-bold gradient-text">
+                    {exercise.syllables[currentSyllable] || "Ma"}
+                  </div>
+                  
+                  <div className="text-sm text-gray-400">
+                    Syllable {currentSyllable + 1} of {exercise.syllables.length}
+                  </div>
+                  
+                  <div className="flex justify-center space-x-3">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handlePrevious}
+                      disabled={currentSyllable === 0}
+                    >
+                      <ApperIcon name="ChevronLeft" size={16} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleNext}
+                      disabled={currentSyllable === exercise.syllables.length - 1}
+                    >
+                      <ApperIcon name="ChevronRight" size={16} />
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-4 gap-2">
+                  {exercise.syllables.map((syllable, index) => (
+                    <Button
+                      key={index}
+                      variant={index === currentSyllable ? "primary" : "ghost"}
+                      size="sm"
+                      className="text-xs"
+                      onClick={() => setCurrentSyllable(index)}
+                    >
+                      {syllable}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Audio Player with Recording */}
+          <Card className="bg-surface/50">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <ApperIcon name="Headphones" size={18} className="text-secondary" />
+                <h3 className="font-semibold">Audio Track & Recording</h3>
+              </div>
+              
+              <AudioPlayer
+                src={exercise.audioExample}
+                className="mb-4"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                enableRecording={true}
+              />
+            </div>
+          </Card>
+
+          {/* Actions */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Button variant="ghost" onClick={onClose}>
+                <ApperIcon name="ArrowLeft" size={16} className="mr-2" />
+                Back to Exercises
+              </Button>
+            </div>
+            
+            <div className="flex items-center space-x-3">
+              <Button
+                variant="accent"
+                onClick={handleComplete}
+                disabled={hasCompleted}
+              >
+                <ApperIcon name="Check" size={16} className="mr-2" />
+                {hasCompleted ? "Completed!" : "Mark Complete"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+);
 };
 
 export default ExerciseRecommendations;
