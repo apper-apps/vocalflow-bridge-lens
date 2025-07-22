@@ -6,14 +6,14 @@ import { cn } from "@/utils/cn";
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
 
-  const navItems = [
+const navItems = [
     { to: "/", icon: "Home", label: "Dashboard" },
     { to: "/practice", icon: "Calendar", label: "Practice" },
     { to: "/exercises", icon: "Dumbbell", label: "Exercises" },
     { to: "/community", icon: "Users", label: "Community" },
+    { to: "/messages", icon: "MessageCircle", label: "Messages" },
     { to: "/events", icon: "Calendar", label: "Events" }
   ];
-
   const isActive = (path) => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);

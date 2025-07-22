@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import Button from "@/components/atoms/Button";
-import Input from "@/components/atoms/Input";
-import Card from "@/components/atoms/Card";
-import Badge from "@/components/atoms/Badge";
-import ApperIcon from "@/components/ApperIcon";
-import SearchBar from "@/components/molecules/SearchBar";
-import CommunityFeed from "@/components/organisms/CommunityFeed";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import userService from "@/services/api/userService";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import ApperIcon from "@/components/ApperIcon";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import CommunityFeed from "@/components/organisms/CommunityFeed";
+import Practice from "@/components/pages/Practice";
+import SearchBar from "@/components/molecules/SearchBar";
+import Card from "@/components/atoms/Card";
+import Input from "@/components/atoms/Input";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import userService from "@/services/api/userService";
 const Community = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("feed");
   const [topSingers, setTopSingers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   const loadTopSingers = async () => {
     try {
       setError("");
@@ -92,11 +93,10 @@ const Community = () => {
 
       {/* Content */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
-        {/* Main Content */}
-        <div className="xl:col-span-3">
+<div className="xl:col-span-3">
           {activeTab === "feed" && <CommunityFeed />}
-          {activeTab === "discover" && <DiscoverContent />}
-          {activeTab === "leaderboard" && <LeaderboardContent topSingers={topSingers} />}
+          {activeTab === "discover" && <DiscoverContent navigate={navigate} />}
+          {activeTab === "leaderboard" && <LeaderboardContent topSingers={topSingers} navigate={navigate} />}
         </div>
 
         {/* Sidebar */}
@@ -176,11 +176,10 @@ const Community = () => {
     </div>
   );
 };
-
-const DiscoverContent = () => {
+const DiscoverContent = ({ navigate }) => {
   return (
     <div className="space-y-6">
-      <Card>
+<Card>
         <h2 className="text-xl font-display font-bold gradient-text mb-4">
           Discover New Singers
         </h2>
@@ -203,11 +202,21 @@ const DiscoverContent = () => {
                   <ApperIcon name="User" size={24} className="text-white" />
                 </div>
                 <h4 className="font-semibold text-white mb-1">{singer.name}</h4>
-                <p className="text-sm text-gray-400 mb-2">{singer.type} • {singer.level}</p>
+<p className="text-sm text-gray-400 mb-2">{singer.type} • {singer.level}</p>
                 <Badge variant="accent" className="text-xs mb-3">{singer.specialty}</Badge>
-                <Button variant="primary" size="sm" className="w-full">
-                  Follow
-                </Button>
+                <div className="flex space-x-2">
+                  <Button variant="primary" size="sm" className="flex-1">
+                    Follow
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => navigate(`/messages/new/${index + 5}`)} // Mock user IDs
+                    className="flex items-center justify-center"
+                  >
+                    <ApperIcon name="MessageCircle" size={16} />
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}
@@ -216,11 +225,10 @@ const DiscoverContent = () => {
     </div>
   );
 };
-
-const LeaderboardContent = ({ topSingers }) => {
+const LeaderboardContent = ({ topSingers, navigate }) => {
   return (
     <div className="space-y-6">
-      <Card>
+<Card>
         <h2 className="text-xl font-display font-bold gradient-text mb-4">
           Practice Streak Leaderboard
         </h2>
@@ -253,15 +261,24 @@ const LeaderboardContent = ({ topSingers }) => {
                   <Badge variant="secondary">{singer.level}</Badge>
                 </div>
               </div>
-              
-              <div className="text-right">
-                <div className="flex items-center space-x-2 mb-1">
-                  <ApperIcon name="Flame" size={20} className="text-accent practice-flame" />
-                  <span className="text-2xl font-bold gradient-text">{singer.streak}</span>
+<div className="flex items-center space-x-4">
+                <div className="text-right">
+                  <div className="flex items-center space-x-2 mb-1">
+                    <ApperIcon name="Flame" size={20} className="text-accent practice-flame" />
+                    <span className="text-2xl font-bold gradient-text">{singer.streak}</span>
+                  </div>
+                  <p className="text-sm text-gray-400">day streak</p>
                 </div>
-                <p className="text-sm text-gray-400">day streak</p>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => navigate(`/messages/new/${singer.Id}`)}
+                  className="flex items-center justify-center"
+                >
+                  <ApperIcon name="MessageCircle" size={16} />
+                </Button>
               </div>
-            </div>
+</div>
           ))}
         </div>
       </Card>

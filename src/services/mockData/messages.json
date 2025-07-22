@@ -1,0 +1,139 @@
+[
+  {
+    "Id": 1,
+    "participants": [1, 2],
+    "messages": [
+      {
+        "Id": 1,
+        "senderId": 2,
+        "content": "Hey Sarah! I loved your performance in the community feed. Your breath control technique is amazing! Could you share some tips?",
+        "timestamp": "2024-01-20T10:30:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 2,
+        "senderId": 1,
+        "content": "Hi Mike! Thank you so much! I'd be happy to help. The key is diaphragmatic breathing - try placing one hand on your chest and one on your belly. The bottom hand should move more than the top one.",
+        "timestamp": "2024-01-20T11:15:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 3,
+        "senderId": 2,
+        "content": "That makes sense! I've been struggling with maintaining breath support during high notes. Any specific exercises you recommend?",
+        "timestamp": "2024-01-20T14:20:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 4,
+        "senderId": 1,
+        "content": "Absolutely! Try the 'hiss' exercise - breathe in deeply, then release air slowly making a 'sss' sound. Start with 10 seconds and work up to 30. Also, lip trills while going up scales help a lot!",
+        "timestamp": "2024-01-20T16:45:00.000Z",
+        "read": false
+      }
+    ],
+    "createdAt": "2024-01-20T10:30:00.000Z",
+    "updatedAt": "2024-01-20T16:45:00.000Z"
+  },
+  {
+    "Id": 2,
+    "participants": [1, 3],
+    "messages": [
+      {
+        "Id": 1,
+        "senderId": 3,
+        "content": "Sarah, I noticed you've been working on some contemporary pieces lately. I'm trying to transition from jazz to more pop-style vocals. Any advice?",
+        "timestamp": "2024-01-19T09:15:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 2,
+        "senderId": 1,
+        "content": "Emma! That's exciting! The transition can be smooth since you already have great musical instincts. Pop vocals tend to be more speech-like and less vibrato-heavy than jazz. Try focusing on clear consonants and straight tone.",
+        "timestamp": "2024-01-19T12:30:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 3,
+        "senderId": 3,
+        "content": "Thanks! Should I still use vibrato at all in pop, or avoid it completely?",
+        "timestamp": "2024-01-19T15:45:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 4,
+        "senderId": 1,
+        "content": "Great question! Use vibrato sparingly - maybe just at the end of sustained notes or for emotional emphasis. Modern pop is more about controlled straight tone with occasional vibrato for color.",
+        "timestamp": "2024-01-19T18:20:00.000Z",
+        "read": false
+      }
+    ],
+    "createdAt": "2024-01-19T09:15:00.000Z",
+    "updatedAt": "2024-01-19T18:20:00.000Z"
+  },
+  {
+    "Id": 3,
+    "participants": [1, 4],
+    "messages": [
+      {
+        "Id": 1,
+        "senderId": 4,
+        "content": "Hi Sarah! I saw your streak on the leaderboard - 23 days is incredible! I'm trying to build consistency. What keeps you motivated for daily practice?",
+        "timestamp": "2024-01-18T07:45:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 2,
+        "senderId": 1,
+        "content": "Alex, thank you! Honestly, it's about making it a non-negotiable part of my day, like brushing teeth. I practice for just 15 minutes every morning - small but consistent beats sporadic long sessions!",
+        "timestamp": "2024-01-18T08:30:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 3,
+        "senderId": 4,
+        "content": "That's brilliant! I keep trying to do hour-long sessions and then burning out. Maybe I should start smaller. What do you focus on in those 15 minutes?",
+        "timestamp": "2024-01-18T19:10:00.000Z",
+        "read": false
+      }
+    ],
+    "createdAt": "2024-01-18T07:45:00.000Z",
+    "updatedAt": "2024-01-18T19:10:00.000Z"
+  },
+  {
+    "Id": 4,
+    "participants": [2, 3],
+    "messages": [
+      {
+        "Id": 1,
+        "senderId": 2,
+        "content": "Emma! I heard your jazz improvisation in yesterday's submission - absolutely amazing! I'm trying to get into jazz vocals myself. Where did you start?",
+        "timestamp": "2024-01-17T14:20:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 2,
+        "senderId": 3,
+        "content": "Mike, thanks so much! I started by learning jazz standards and really listening to the greats - Ella Fitzgerald, Sarah Vaughan, Billie Holiday. Try 'Summertime' or 'Fly Me to the Moon' as starter pieces!",
+        "timestamp": "2024-01-17T16:35:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 3,
+        "senderId": 2,
+        "content": "Perfect! I'll start with 'Fly Me to the Moon' - I love that song. Any tips for developing that jazz 'feel'?",
+        "timestamp": "2024-01-17T20:15:00.000Z",
+        "read": true
+      },
+      {
+        "Id": 4,
+        "senderId": 3,
+        "content": "The swing feel is everything! Try snapping on beats 2 and 4 while you sing, and don't be afraid to play with the rhythm - jazz is all about personal expression. Listen to lots of recordings and find your own style!",
+        "timestamp": "2024-01-17T21:45:00.000Z",
+        "read": false
+      }
+    ],
+    "createdAt": "2024-01-17T14:20:00.000Z",
+    "updatedAt": "2024-01-17T21:45:00.000Z"
+  }
+]
